@@ -51,7 +51,7 @@
     }
     else if (typeof params == 'function') {
       cbk = params;
-      params = {"tag":'globalwall'},
+      params = {"tag":'globalwall'};
     }
 
     // ensure third param is a func
@@ -60,19 +60,18 @@
     }
 
     var p   = $.extend({}, $.photowall.defaults, params);
-    var req = API_HOST + '/' + type + '?';
+    var req = API_HOST + '/' + type + '?callback=?';
 
     // build request
     $.get(req, p, function(resp) {
       cbk.apply(this, [resp]);
-    });
+    }, 'jsonp');
   };
 
   $.photowall.defaults = {
     "page": 1,
     "per_page": 10,
-    "format": 'json',
-    "callback": '?'
+    "format": 'json'
   };
 
 })(jQuery);
